@@ -35,7 +35,8 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
   end
 
   watch(%r{^app/helpers/(.*?)_helper\.rb$}) do |matches|
-    integration_tests(matches[1])
+    "test/helpers/#{matches[1]}_test.rb"
+    #integration_tests(matches[1])
   end
 
   watch('app/views/layouts/application.html.erb') do 

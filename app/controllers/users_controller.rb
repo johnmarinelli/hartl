@@ -13,6 +13,9 @@ class UsersController < ApplicationController
     @microposts = @user.microposts
   end
 
+  def login
+  end
+
   # GET /users/new
   def new
     @user = User.new
