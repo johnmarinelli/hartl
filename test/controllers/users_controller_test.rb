@@ -23,6 +23,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_url(User.last)
   end
 
+  test "should get login" do
+    get login_path
+    assert_response :success
+  end
+
   test "should show user" do
     get user_url(@user)
     assert_response :success
