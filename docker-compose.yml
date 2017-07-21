@@ -4,5 +4,12 @@ app:
   volumes:
     - .:/app
   ports:
-    - "3000:3000"
+    - "3001:3000"
+  links:
+    - postgres
+
+postgres:
+  image: postgres:9.4
+  ports:
+    - "5432"
 

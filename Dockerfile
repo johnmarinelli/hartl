@@ -18,4 +18,5 @@ COPY . ./
 # Expose port 3000 to docker host so we can access from outside
 EXPOSE 3000
 
+CMD ["bundle", "exec", "rake", "db:migrate"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
