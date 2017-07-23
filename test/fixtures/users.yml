@@ -3,11 +3,11 @@
 one:
   id: 1
   name: MyString
-  email: MyString@hotmail.com
-  password_digest: <%= BCrypt::Password.create('user1', cost: 5) %>
+  email: mystring@hotmail.com
+  password_digest: <%= BCrypt::Password.create('password1', cost: 5) %>
 
 two:
   id: 2
   name: MyString
-  email: MyString@yahoo.com
-  password_digest: <%= BCrypt::Password.create('user2', cost: 5) %>
+  email: mystring@yahoo.com
+  password_digest: <%= BCrypt::Password.create('password2', cost: 5) %>
