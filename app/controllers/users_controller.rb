@@ -7,13 +7,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     @microposts = @user.microposts
+    redirect_to root_url and return unless @user.activated?
   end
 
   # GET /users/new
@@ -32,10 +33,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        log_in @user
-        flash[:success] = 'User successfully created.'
-        format.html { redirect_to @user }
-        format.json { render :show, status: :created, location: @user }
+        @user.send_activation_email
+        flash[:info] = 'Check your email to activate your account.'
+        format.html { redirect_to root_url }
       else
         flash[:danger] = 'There are errors.'
         format.html { render :new }

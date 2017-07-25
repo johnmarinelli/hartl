@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :microposts
+  resources :account_activations, only: [:edit]
   get 'sessions/new'
 
   get '/help', to: 'static_pages#help'
