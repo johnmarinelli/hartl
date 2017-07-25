@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersIndexTest < ActionDispatch::IntegrationTest
   def setup
     @user = users :one
+    @other_user = users :two
   end
 
   test "index including pagination" do
@@ -19,5 +20,11 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   test "unauthenticated user can't see user index" do
     get users_path
     assert_redirected_to login_url
+  end
+
+  test "non admin user can't see delete link" do
+    log_in_as @other_user, 'password2'
+    get users_path
+    assert_select 'a', text: 'delete', count: 0
   end
 end
