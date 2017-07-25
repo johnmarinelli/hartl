@@ -5,9 +5,24 @@ one:
   name: MyString
   email: mystring@hotmail.com
   password_digest: <%= BCrypt::Password.create('password1', cost: 5) %>
+  admin: 1
 
 two:
   id: 2
-  name: MyString
-  email: mystring@yahoo.com
+  name: MyString2
+  email: mystring2@yahoo.com
   password_digest: <%= BCrypt::Password.create('password2', cost: 5) %>
+
+three:
+  id: 3
+  name: MyString3
+  email: mystring3@yahoo.com
+  password_digest: <%= BCrypt::Password.create('password3', cost: 5) %>
+
+<% (4..30).each do |n| %>
+user_<%= n %>:
+  id: <%= n %>
+  name: <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= BCrypt::Password.create('password', cost: 5) %>
+<% end %>

@@ -57,14 +57,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with remembering" do
     @user = users :one
-    log_in_as @user, password: 'password1', remember_me: '1'
+    log_in_as @user, 'password1', remember_me: '1'
     assert_not_empty cookies['remember_token']
   end
 
   test "login without remembering" do
     @user = users :one
-    log_in_as @user, password: 'password1', remember_me: '1'
-    log_in_as @user, password: 'password1', remember_me: '0'
+    log_in_as @user, 'password1', remember_me: '1'
+    log_in_as @user, 'password1', remember_me: '0'
     assert_empty cookies['remember_token']
   end
 end
