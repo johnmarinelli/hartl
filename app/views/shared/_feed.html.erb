@@ -1,0 +1,12 @@
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <% # rails knows to use the microposts partial %>
+    <% # because each element of @feed_items %>
+    <% # has a Micropost class %>
+    <% # this causes rails to look for a partial with %>
+    <% # corresponding name in views directory of %>
+    <% # given resource %>
+    <%= render @feed_items %>
+  </ol>
+  <%= will_paginate @feed_items %>
+<% end %>
