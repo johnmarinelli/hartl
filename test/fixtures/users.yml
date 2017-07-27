@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   name: MyString
   email: mystring@hotmail.com
   password_digest: <%= BCrypt::Password.create('password1', cost: 5) %>
@@ -10,7 +9,6 @@ one:
   activated_at: Time.zone.now
 
 two:
-  id: 2
   name: MyString2
   email: mystring2@yahoo.com
   password_digest: <%= BCrypt::Password.create('password2', cost: 5) %>
@@ -18,7 +16,6 @@ two:
   activated_at: Time.zone.now
 
 three:
-  id: 3
   name: MyString3
   email: mystring3@yahoo.com
   password_digest: <%= BCrypt::Password.create('password3', cost: 5) %>
@@ -27,7 +24,6 @@ three:
 
 <% (4..30).each do |n| %>
 user_<%= n %>:
-  id: <%= n %>
   name: <%= "User #{n}" %>
   email: <%= "user-#{n}@example.com" %>
   password_digest: <%= BCrypt::Password.create('password', cost: 5) %>

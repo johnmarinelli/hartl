@@ -1,0 +1,16 @@
+one:
+  follower: one
+  followed: two
+
+two:
+  follower: three
+  followed: two
+
+three:
+  follower: one
+  followed: three
+
+four:
+  follower: three
+  followed: one
+  

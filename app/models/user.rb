@@ -10,6 +10,19 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }, presence: true, allow_nil: true
   has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship', 
+                                  foreign_key: 'follower_id', 
+                                  dependent: :destroy
+
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
+
+  has_many :following, through: :active_relationships, 
+                       source: :followed
+  has_many :followers, through: :passive_relationships,
+                       source: :follower
+
   default_scope -> { order created_at: :desc }
 
   has_secure_password
@@ -71,7 +84,26 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  def following?(user)
+    following.include?(user)
+  end
+
+  def follow(user)
+    following << user
+  end
+
+  def unfollow(user)
+    following.delete user
+  end
+
   def feed
-    Micropost.where "user_id=?", id
+    # following_ids is rails magic.
+    # finds the 'following' association and appends _ids to it
+    # from the 'has_many' association
+    following_ids = "select followed_id from relationships 
+                     where follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids}) 
+                     or user_id = :user_id", 
+                     user_id: id)
   end
 end
